@@ -30,6 +30,16 @@ lable.place(relx=1,
 full_screen.pack()
 canvas.pack(fill='both', expand=True)
 canvas.create_image(0, 0, image=bg, anchor="nw")
+
+
+# bind keys
+def close_the_window(event):
+    return window.destroy()
+
+
+window.bind("<Escape>", close_the_window)
+
+
 window.mainloop()
 
 
