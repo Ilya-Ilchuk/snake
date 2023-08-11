@@ -4,6 +4,8 @@ from settings import *
 window = Tk()
 icon = PhotoImage(file='dragon-snake.png')
 lable = Label(window, text=f'Score: {score}')
+bg = PhotoImage(file='dragon-snake.png')
+canvas = Canvas(window, width=420, height=420)
 
 
 def presing_the_button_full_screen():
@@ -26,6 +28,8 @@ lable.place(relx=1,
             rely=0,
             anchor='ne')
 full_screen.pack()
+canvas.pack(fill='both', expand=True)
+canvas.create_image(0, 0, image=bg, anchor="nw")
 window.mainloop()
 
 
