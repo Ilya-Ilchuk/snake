@@ -1,42 +1,42 @@
 from tkinter import *
 from settings import *
 
-window = Tk()
-icon = PhotoImage(file='dragon-snake.png')
-lable = Label(window, text=f'Score: {score}')
-bg = PhotoImage(file='dragon-snake.png')
-canvas = Canvas(window, width=420, height=420)
+# functions
+
+
+def close_the_window(event):
+    event.widget.destroy()
 
 
 def presing_the_button_full_screen():
     if window.attributes('-fullscreen'):
         window.attributes('-fullscreen', False)
-
     else:
         window.attributes('-fullscreen', True)
 
 
+# create variebls
+window = Tk()
+icon = PhotoImage(file='images\dragon-snake.png')
+lable = Label(window, text=f'Score: {score}', font='bold', bg='red')
+bg = PhotoImage(file='images\dragon-snake.png')
+canvas = Canvas(window, width=1000, height=1000, bg='gray')
 full_screen = Button(window, text='Full Screen', command=presing_the_button_full_screen,
                      font=('Comic Sans', 10), fg='gray')
 
-
-window.geometry('420x420+640+0')
+# set parameters
+window.geometry('800x600+450+0')
 window.title('The dragon-snake')
 window.iconphoto(True, icon)
-window.config(background='black')
+window.config(background='gray')
 lable.place(relx=1,
             rely=0,
             anchor='ne')
 full_screen.pack()
-canvas.pack(fill='both', expand=True)
+canvas.pack()
+
+# adding functionality to existing parameters
 canvas.create_image(0, 0, image=bg, anchor="nw")
-
-
-# bind keys
-def close_the_window(event):
-    return window.destroy()
-
-
 window.bind("<Escape>", close_the_window)
 
 
