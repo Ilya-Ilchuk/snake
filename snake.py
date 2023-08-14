@@ -1,8 +1,21 @@
 from tkinter import *
-from settings import *
 from PIL import Image, ImageTk
 import random
 
+
+"""Settings"""
+# window
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 400
+SCREEN_OFFSET_X = 200
+SCREEN_OFFSET_Y = 100
+# snake
+SIZE = 20
+COLOR = (0, 128, 0)
+# general
+score = 0
+new_width = 810  # Change this to your desired width
+new_height = 610  # Change this to your desired height
 
 window = Tk()
 icon = PhotoImage(file='images\dragon-snake.png')
@@ -90,7 +103,7 @@ class Food:
 
 food = Food()
 
-food = canvas.create_rectangle(
+canvas.create_rectangle(
     food.x, food.y, food.x + 20, food.y + 20, fill='red')
 
 
@@ -103,9 +116,34 @@ class Snake:
 snake = Snake()
 
 
-snake = canvas.create_rectangle(
+created_snake = canvas.create_rectangle(
     snake.x, snake.y, snake.x + 20, snake.y + 20, fill='green')
 
+
+def change_direction(direction):
+    if direction == 'left':
+        canvas.coords(snake.id, snake.x - 20, snake.y, snake.x, snake.y + 20)
+    elif direction == 'right':
+        canvas.coords(snake.id, snake.x + 20, snake.y,
+                      snake.x + 40, snake.y + 20)
+    elif direction == 'up':
+        canvas.coords(snake.id, snake.x, snake.y - 20, snake.x + 20, snake.y)
+    elif direction == 'down':
+        canvas.coords(snake.id, snake.x, snake.y +
+                      20, snake.x + 20, snake.y + 40)
+
+# ... (other code)
+
+
+snake = Snake()
+
+snake.id = canvas.create_rectangle(
+    snake.x, snake.y, snake.x + 20, snake.y + 20, fill='green')
+
+window.bind('<Left>', lambda event: change_direction('left'))
+window.bind('<Right>', lambda event: change_direction('right'))
+window.bind('<Up>', lambda event: change_direction('up'))
+window.bind('<Down>', lambda event: change_direction('down'))
 
 window.mainloop()
 
